@@ -11,11 +11,26 @@ Provide a feature like the Forwardable library, but set the return value to self
 It provides a class level "command" method to do message forwarding.
 
 ```ruby
-class SomeClass
+class Person
   extend Direction
 
-  command [:name, :id] => :collaborator, [:color, :type] => :partner
+  command [:print_address => :home
+
+  attr_accessor :home
 end
+
+class Home
+  def print_address(template)
+    template << "... the address.."
+  end
+end
+
+template = STDOUT
+person = Person.new
+person.home = Home.new
+#commands won't leak internal structure and return the receiver of the command
+person.print_address(template) #=> person
+
 ```
 
 This will define methods on instances that forward to the provided receiver while enforcing encapsulation of the relationship between objects.
