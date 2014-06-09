@@ -2,13 +2,17 @@ require 'test_helper'
 
 class Person
   extend Direction
-  command :make_me_a_sandwich => :@friend
+  command [:make_me_a_sandwich, :cook] => :@friend
   attr_accessor :friend
 end
 
 class Friend
   def make_me_a_sandwich
     Menu.record "I made a sandwich!"
+  end
+
+  def cook(what)
+    Menu.record what
   end
 end
 
@@ -41,5 +45,11 @@ describe Direction do
   
   it 'returns the original receiver' do
     assert_equal person, person.make_me_a_sandwich
+  end
+
+  it 'forwards additional arguments' do
+    assert_equal [], Menu.list
+    person.cook('yum')
+    assert_includes Menu.list, "yum"
   end
 end

@@ -20,12 +20,12 @@ module Direction
       Array(key).map do |command_name|
         method_defs.unshift %{
           def #{command_name}(*args, &block)
-            #{value}.__send__(:#{command_name})
+            #{value}.__send__(:#{command_name}, *args, &block)
             self
           end
         }
       end
     end
-    self.class_eval method_defs.join(' ')
+    self.class_eval method_defs.join(' '), __FILE__, __LINE__
   end
 end
