@@ -14,7 +14,7 @@ It provides a class level "command" method to do message forwarding.
 class Person
   extend Direction
 
-  command [:print_address => :home
+  command [:print_address] => :home
 
   attr_accessor :home
 end
