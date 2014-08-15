@@ -81,3 +81,6 @@ def setup
   @customer = Customer.new(@server)
   @manager
 end
+
+# Try loading this in the console and interact to make food using @manager vs. @customer
+# @customer.order_food('burrito').pay_bill vs. ... lots of commands for @manager
