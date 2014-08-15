@@ -7,7 +7,8 @@ require "direction/version"
 # class SomeClass
 #   extend Direction
 # 
-#   command [:name, :id] => :collaborator, [:color, :type] => :@partner
+#   command [:print_details, :setup_things] => :collaborator
+#   query [:name, :id] => :collaborator, :type => :@partner
 # end
 # 
 # This will define methods on instances that forward to the
@@ -22,6 +23,20 @@ module Direction
           def #{command_name}(*args, &block)
             #{value}.__send__(:#{command_name}, *args, &block)
             self
+          end
+        }
+      end
+    end
+    self.class_eval method_defs.join(' '), __FILE__, __LINE__
+  end
+
+  def query(options)
+    method_defs = []
+    options.each_pair do |key, value|
+      Array(key).map do |command_name|
+        method_defs.unshift %{
+          def #{command_name}(*args, &block)
+            #{value}.__send__(:#{command_name}, *args, &block)
           end
         }
       end
