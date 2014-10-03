@@ -6,3 +6,6 @@ rvm:
   - rbx-2
 env:
 - COVERALLS=true
+matrix:
+  allow_failures:
+    - rvm: jruby-head
