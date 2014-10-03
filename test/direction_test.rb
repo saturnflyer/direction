@@ -65,6 +65,7 @@ describe Direction, 'command' do
               }
   before do
     Menu.clear
+    Activities.clear
   end
   it 'forwards a message to another object' do
     assert_equal [], Menu.list
