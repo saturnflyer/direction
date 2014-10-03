@@ -18,10 +18,10 @@ module Direction
 
   # Forward messages and return self, protecting the encapsulation of the object
   def command(options)
-    Direction.define_methods(self, options) do |message, accessor|
+    Direction.define_methods(self, options) do |command, accessor|
       %{
-      def #{message}(*args, &block)
-        #{accessor}.__send__(:#{message}, *args, &block)
+      def #{command}(*args, &block)
+        #{accessor}.__send__(:#{command}, *args, &block)
         self
       end
       }
@@ -30,10 +30,10 @@ module Direction
 
   # Forward messages and return the result of the forwarded message
   def query(options)
-    Direction.define_methods(self, options) do |message, accessor|
+    Direction.define_methods(self, options) do |query, accessor|
       %{
-      def #{message}(*args, &block)
-        #{accessor}.__send__(:#{message}, *args, &block)
+      def #{query}(*args, &block)
+        #{accessor}.__send__(:#{query}, *args, &block)
       end
       }
     end
