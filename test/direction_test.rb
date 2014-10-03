@@ -2,8 +2,8 @@ require 'test_helper'
 
 class Person
   extend Direction
-  command [:make_me_a_sandwich, :cook] => :@friend
-  query [:activities, :go] => :friend
+  command [:make_me_a_sandwich, :cook, :blocky] => :@friend
+  query [:activities, :go, :say_what] => :friend
   attr_accessor :friend
 end
 
@@ -22,6 +22,14 @@ class Friend
 
   def go(do_what)
     Activities.record do_what
+  end
+
+  def blocky(text)
+    Activities.record([yield(self).to_s,text].join(' '))
+  end
+
+  def say_what(text)
+    [yield(self).to_s,text].join(' ')
   end
 end
 
@@ -73,6 +81,14 @@ describe Direction, 'command' do
     person.cook('yum')
     assert_includes Menu.list, "yum"
   end
+
+  it 'forwards block arguments' do
+    assert_equal [], Activities.list
+    person.blocky('yay!') do |friend|
+      "Arguments forwarded to #{friend}"
+    end
+    assert_includes Activities.list, "Arguments forwarded to #{friend} yay!"
+  end
 end
 
 describe Direction, 'query' do
@@ -93,5 +109,13 @@ describe Direction, 'query' do
     assert_equal [], Activities.list
     person.go('have fun')
     assert_includes Activities.list, "have fun"
+  end
+
+  it 'forwards block arguments' do
+    assert_equal [], Activities.list
+    what_said = person.say_what('yay!') do |friend|
+      "Arguments forwarded to #{friend}"
+    end
+    assert_equal what_said, "Arguments forwarded to #{friend} yay!"
   end
 end

@@ -20,8 +20,12 @@ module Direction
     options.each_pair do |key, value|
       Array(key).map do |command_name|
         method_defs.unshift %{
-          def #{command_name}(*args, &block)
-            #{value}.__send__(:#{command_name}, *args, &block)
+          def #{command_name}(*args)
+            if block_given?
+              #{value}.__send__(:#{command_name}, *args) { |*block_args| yield(*block_args) }
+            else
+              #{value}.__send__(:#{command_name}, *args)
+            end
             self
           end
         }
@@ -36,7 +40,11 @@ module Direction
       Array(key).map do |command_name|
         method_defs.unshift %{
           def #{command_name}(*args, &block)
-            #{value}.__send__(:#{command_name}, *args, &block)
+            if block_given?
+              #{value}.__send__(:#{command_name}, *args) { |*block_args| yield(*block_args) }
+            else
+              #{value}.__send__(:#{command_name}, *args)
+            end
           end
         }
       end
