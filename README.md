@@ -52,6 +52,8 @@ Or install it yourself as:
 
 ## Contributing
 
+Special thanks to [Aaron Kromer](https://github.com/cupakromer/) and [Ken Collins](https://github.com/metaskills) for their thoughts and code.
+
 1. Fork it ( http://github.com/saturnflyer/direction/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
