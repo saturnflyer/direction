@@ -1,5 +1,10 @@
 # Direction
 
+[![Build Status](https://travis-ci.org/saturnflyer/direction.png?branch=master)](https://travis-ci.org/saturnflyer/direction)
+[![Code Climate](https://codeclimate.com/github/saturnflyer/direction.png)](https://codeclimate.com/github/saturnflyer/direction)
+[![Coverage Status](https://coveralls.io/repos/saturnflyer/direction/badge.png)](https://coveralls.io/r/saturnflyer/direction)
+[![Gem Version](https://badge.fury.io/rb/direction.png)](http://badge.fury.io/rb/direction)
+
 Enforce better encapsulation by returning self from commands.
 
 Thanks to James Ladd for the inspiration.
