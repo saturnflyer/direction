@@ -1,0 +1,9 @@
+language: ruby
+rvm:
+  - 2.0.0
+  - 2.1.0
+  - ruby-head
+  - jruby-head
+  - rbx-2
+env:
+- COVERALLS=true
