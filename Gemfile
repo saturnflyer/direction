@@ -1,4 +1,11 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in direction.gemspec
 gemspec
+
+group :test do
+  gem 'rubinius-coverage', platform: :rbx
+  gem 'coveralls', require: false
+  gem 'minitest'
+  gem 'rake'
+  gem 'simplecov'
+end
