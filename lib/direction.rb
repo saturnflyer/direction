@@ -43,7 +43,7 @@ module Direction
     method_defs = []
     options.each_pair do |method_names, accessor|
       Array(method_names).map do |message|
-        method_defs.unshift yield(message, accessor)
+        method_defs.push yield(message, accessor)
       end
     end
     mod.class_eval method_defs.join("\n"), __FILE__, __LINE__
