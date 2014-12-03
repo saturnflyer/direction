@@ -9,11 +9,11 @@ end
 
 class Friend
   def make_me_a_sandwich
-    Menu.record "I made a sandwich!"
+    Table.place "a sandwich!"
   end
 
   def cook(what)
-    Menu.record what
+    Table.place what
   end
 
   def activities
@@ -33,15 +33,15 @@ class Friend
   end
 end
 
-module Menu
-  def self.record(text)
-    list << text
+module Table
+  def self.place(text)
+    contents << text
   end
-  def self.list
-    @list ||= []
+  def self.contents
+    @contents ||= []
   end
   def self.clear
-    @list = []
+    @contents = []
   end
 end
 
@@ -64,13 +64,13 @@ describe Direction, 'command' do
                 person
               }
   before do
-    Menu.clear
+    Table.clear
     Activities.clear
   end
   it 'forwards a message to another object' do
-    assert_equal [], Menu.list
+    assert_equal [], Table.contents
     person.make_me_a_sandwich
-    assert_includes Menu.list, "I made a sandwich!"
+    assert_includes Table.contents, "a sandwich!"
   end
   
   it 'returns the original receiver' do
@@ -78,9 +78,9 @@ describe Direction, 'command' do
   end
 
   it 'forwards additional arguments' do
-    assert_equal [], Menu.list
+    assert_equal [], Table.contents
     person.cook('yum')
-    assert_includes Menu.list, "yum"
+    assert_includes Table.contents, "yum"
   end
 
   it 'forwards block arguments' do
