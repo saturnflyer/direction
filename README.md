@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/saturnflyer/direction.png?branch=master)](https://travis-ci.org/saturnflyer/direction)
 [![Code Climate](https://codeclimate.com/github/saturnflyer/direction.png)](https://codeclimate.com/github/saturnflyer/direction)
-[![Coverage Status](https://coveralls.io/repos/saturnflyer/direction/badge.png)](https://coveralls.io/r/saturnflyer/direction)
+[![Coverage Status](https://codecov.io/gh/saturnflyer/direction/branch/master/graph/badge.svg?token=iA1l7s5HG4)](https://codecov.io/gh/saturnflyer/direction)
 [![Gem Version](https://badge.fury.io/rb/direction.png)](http://badge.fury.io/rb/direction)
 
 Enforce better encapsulation by returning self from commands.
