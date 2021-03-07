@@ -3,10 +3,8 @@ SimpleCov.start do
   add_filter 'test'
 end
 
-require 'coveralls'
-if ENV['COVERALLS']
-  Coveralls.wear!
-end
+require 'codecov'
+SimpleCov.formatter = SimpleCov::Formatter::Codecov
 
 require 'minitest/autorun'
 require 'direction'
