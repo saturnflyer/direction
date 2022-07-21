@@ -6,8 +6,6 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    codecov (0.6.0)
-      simplecov (>= 0.15, < 0.22)
     docile (1.4.0)
     minitest (5.16.2)
     rake (13.0.6)
@@ -22,7 +20,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  codecov
   direction!
   minitest
   rake
