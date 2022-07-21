@@ -9,6 +9,8 @@ require "direction/version"
 # 
 #   command [:print_details, :setup_things] => :collaborator
 #   query [:name, :id] => :collaborator, :type => :@partner
+#
+#   def_command :collaborator, :print_details, :aliased_name_for_print_details
 # end
 # 
 # This will define methods on instances that forward to the
