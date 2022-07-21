@@ -32,4 +32,5 @@ Gem::Specification.new do |spec|
   ]
   spec.test_files    = ["test/direction_test.rb", "test/test_helper.rb"]
   spec.require_paths = ["lib"]
+  spec.required_ruby_version = ">= 2.7"
 end
