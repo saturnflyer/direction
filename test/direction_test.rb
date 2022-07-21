@@ -5,6 +5,8 @@ class Person
   command [:make_me_a_sandwich, :cook, :blocky] => :@friend
   query [:activities, :go, :say_what] => :friend
   attr_accessor :friend
+
+  def_command :friend, :cook, :get_in_the_kitchen_and_cook
 end
 
 class Friend
@@ -89,6 +91,11 @@ describe Direction, 'command' do
       "Arguments forwarded to #{friend}"
     end
     assert_includes Activities.list, "Arguments forwarded to #{friend} yay!"
+  end
+
+  it 'allows individual commands with an alias' do
+    person.get_in_the_kitchen_and_cook("breakfast")
+    assert_includes Table.contents, "breakfast"
   end
 end
 
