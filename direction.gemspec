@@ -17,6 +17,8 @@ Gem::Specification.new do |spec|
     "Gemfile",
     "LICENSE.txt",
     "README.md",
+    "CODE_OF_CONDUCT.md",
+    "CHANGELOG.md",
     "Rakefile",
     "direction.gemspec",
     "lib/direction.rb",
