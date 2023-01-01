@@ -22,15 +22,7 @@ Gem::Specification.new do |spec|
     "Rakefile",
     "direction.gemspec",
     "lib/direction.rb",
-    "lib/direction/version.rb",
-    "sample.rb",
-    "sample/accountant.rb",
-    "sample/customer.rb",
-    "sample/kitchen.rb",
-    "sample/micro_manager.rb",
-    "sample/server.rb",
-    "test/direction_test.rb",
-    "test/test_helper.rb"
+    "lib/direction/version.rb"
   ]
   spec.test_files    = ["test/direction_test.rb", "test/test_helper.rb"]
   spec.require_paths = ["lib"]
