@@ -1,7 +1,8 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
 gemspec
 
-gem 'minitest'
-gem 'rake'
-gem 'simplecov'
+gem "minitest"
+gem "rake"
+gem "simplecov"
+gem "standardrb"

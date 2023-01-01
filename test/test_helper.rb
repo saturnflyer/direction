@@ -1,8 +1,8 @@
-require 'simplecov'
+require "simplecov"
 SimpleCov.start do
-  add_filter 'test'
-  add_filter 'direction/version'
+  add_filter "test"
+  add_filter "direction/version"
 end
 
-require 'minitest/autorun'
-require 'direction'
+require "minitest/autorun"
+require "direction"

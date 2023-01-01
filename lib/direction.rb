@@ -3,18 +3,18 @@ require "direction/version"
 # but set the return value to self.
 # It provides a class level "command" method to do
 # message forwarding.
-# 
+#
 # class SomeClass
 #   extend Direction
-# 
+#
 #   command [:print_details, :setup_things] => :collaborator
 #   query [:name, :id] => :collaborator, :type => :@partner
 #
 #   def_command :collaborator, :print_details, :aliased_name_for_print_details
 # end
-# 
+#
 # This will define methods on instances that forward to the
-# provided receiver while enforcing encapsulation of the 
+# provided receiver while enforcing encapsulation of the
 # relationship between objects.
 module Direction
   def self.extended(base)
