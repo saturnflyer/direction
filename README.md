@@ -1,7 +1,5 @@
 # Direction
 
-[![Build Status](https://travis-ci.org/saturnflyer/direction.png?branch=master)](https://travis-ci.org/saturnflyer/direction)
-[![Code Climate](https://codeclimate.com/github/saturnflyer/direction.png)](https://codeclimate.com/github/saturnflyer/direction)
 [![Gem Version](https://badge.fury.io/rb/direction.png)](http://badge.fury.io/rb/direction)
 
 Enforce better encapsulation by returning self from commands.
@@ -38,7 +36,6 @@ person.print_address(template) #=> person
 ```
 
 This will define methods on instances that forward to the provided receiver while enforcing encapsulation of the relationship between objects.
-
 
 ## Installation
 
