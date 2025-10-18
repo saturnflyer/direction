@@ -1,7 +1,8 @@
-# 2.0.0
+# Changelog
 
-Rely on Forwardable to generate methods
+All notable changes to this project will be documented in this file.
 
-# 1.0.0
+The format is based on [Keep a Changelog](http://keepachangelog.com/)
+and this project adheres to [Semantic Versioning](http://semver.org/).
 
-Add def_command for individual commands with an alias option
+## [2.0.0]
