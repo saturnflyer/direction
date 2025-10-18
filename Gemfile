@@ -4,5 +4,6 @@ gemspec
 
 gem "minitest"
 gem "rake"
+gem "reissue"
 gem "simplecov"
 gem "standardrb"
