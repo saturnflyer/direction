@@ -1,3 +1,4 @@
+require "forwardable"
 require "direction/version"
 # Provide a feature like the Forwardable library,
 # but set the return value to self.
@@ -29,12 +30,14 @@ module Direction
   end
 
   # Create an individual command with an optional alias
+  #
+  # Defines the forwarding method directly rather than via Forwardable so
+  # that method names which aren't plain identifiers -- bang (reload!),
+  # predicate (ready?), setter (value=) or operator methods -- are supported.
   def def_command accessor, method_name, aliased_method_name = method_name
-    result_name = "#{aliased_method_name}_result"
-    def_delegator accessor, method_name, result_name
-    private result_name
     define_method aliased_method_name do |*args, **kwargs, &block|
-      send(result_name, *args, **kwargs, &block)
+      receiver = accessor.to_s.start_with?("@") ? instance_variable_get(accessor) : __send__(accessor)
+      receiver.__send__(method_name, *args, **kwargs, &block)
       self
     end
   end

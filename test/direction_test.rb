@@ -63,6 +63,23 @@ module Activities
   end
 end
 
+class SpecialCollaborator
+  attr_reader :value
+
+  def reload!
+    Table.place "reloaded"
+  end
+
+  def ready?
+    Table.place "asked if ready"
+    true
+  end
+
+  def value=(new_value)
+    @value = new_value
+  end
+end
+
 describe Direction, "command" do
   let(:friend) { Friend.new }
   let(:person) {
@@ -131,5 +148,44 @@ describe Direction, "query" do
       "Arguments forwarded to #{friend}"
     end
     assert_equal what_said, "Arguments forwarded to #{friend} yay!"
+  end
+end
+
+describe Direction, "command with non-identifier method names" do
+  let(:collaborator) { SpecialCollaborator.new }
+  let(:commander) {
+    klass = Class.new do
+      extend Direction
+      command [:reload!, :ready?, :value=] => :collab
+      attr_accessor :collab
+    end
+    obj = klass.new
+    obj.collab = collaborator
+    obj
+  }
+  before { Table.clear }
+
+  it "forwards a bang method and returns self" do
+    assert_equal commander, commander.reload!
+    assert_includes Table.contents, "reloaded"
+  end
+
+  it "forwards a predicate method and returns self" do
+    assert_equal commander, commander.ready?
+    assert_includes Table.contents, "asked if ready"
+  end
+
+  it "forwards a setter method" do
+    commander.send(:value=, 42)
+    assert_equal 42, collaborator.value
+  end
+end
+
+describe Direction, "loading" do
+  it "can be extended without requiring forwardable first" do
+    lib = File.expand_path("../lib", __dir__)
+    script = 'require "direction"; Class.new { extend Direction }; print "ok"'
+    output = IO.popen([RbConfig.ruby, "-I#{lib}", "-e", script], err: [:child, :out], &:read)
+    assert_equal "ok", output
   end
 end
