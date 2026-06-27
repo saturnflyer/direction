@@ -2,6 +2,7 @@ require "test_helper"
 
 class Person
   extend Direction
+
   command [:make_me_a_sandwich, :cook, :blocky] => :@friend
   query [:activities, :go, :say_what] => :friend
   attr_accessor :friend
@@ -75,8 +76,20 @@ class SpecialCollaborator
     true
   end
 
-  def value=(new_value)
-    @value = new_value
+  attr_writer :value
+end
+
+class ArgReceiver
+  def configure(name:, size: 0)
+    Table.place "#{name}:#{size}"
+  end
+
+  def mix(label, name:)
+    Table.place "#{label}/#{name}/#{yield}"
+  end
+
+  def <<(item)
+    Table.place "appended #{item}"
   end
 end
 
@@ -156,6 +169,7 @@ describe Direction, "command with non-identifier method names" do
   let(:commander) {
     klass = Class.new do
       extend Direction
+
       command [:reload!, :ready?, :value=] => :collab
       attr_accessor :collab
     end
@@ -178,6 +192,37 @@ describe Direction, "command with non-identifier method names" do
   it "forwards a setter method" do
     commander.send(:value=, 42)
     assert_equal 42, collaborator.value
+  end
+end
+
+describe Direction, "command argument forwarding" do
+  let(:collaborator) { ArgReceiver.new }
+  let(:commander) {
+    klass = Class.new do
+      extend Direction
+
+      command [:configure, :mix, :<<] => :collab
+      attr_accessor :collab
+    end
+    obj = klass.new
+    obj.collab = collaborator
+    obj
+  }
+  before { Table.clear }
+
+  it "forwards keyword arguments and returns self" do
+    assert_equal commander, commander.configure(name: "db", size: 5)
+    assert_includes Table.contents, "db:5"
+  end
+
+  it "forwards positional, keyword, and block arguments together" do
+    assert_equal commander, commander.mix("L", name: "n") { "B" }
+    assert_includes Table.contents, "L/n/B"
+  end
+
+  it "forwards an operator method and returns self" do
+    assert_equal commander, commander.<<("x")
+    assert_includes Table.contents, "appended x"
   end
 end
 
