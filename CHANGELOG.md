@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [2.0.2] - Unreleased
 
+### Performance
+
+- `command`/`def_command` now generate the forwarding method as source using
+  `(...)` argument forwarding. Forwarded calls allocate zero objects (previously
+  3 for positional/keyword and 5 for block calls) and run roughly 2.8x-5x faster
+  on Ruby 4.0, since receiver lookup and the forwarded send are plain
+  inline-cacheable calls (friendly to Object Shapes and YJIT) instead of dynamic
+  `__send__`. Setter and operator method names fall back to `define_method` and
+  remain supported.
+
+### Changed
+
+- Require Ruby >= 3.2 (was >= 2.7), dropping EOL versions.
+- CI tests Ruby 3.3, 3.4, and 4.0.
+
 ## [2.0.1] - 2026-06-24
 
 ### Fixed
